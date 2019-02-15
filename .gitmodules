@@ -1,3 +1,6 @@
 [submodule "db/test_db"]
 	path = db/test_db
 	url = https://github.com/datacharmer/test_db
+[submodule "db/semcw_db"]
+	path = db/semcw_db
+	url = https://github.com/AaronC98/semcw_db
