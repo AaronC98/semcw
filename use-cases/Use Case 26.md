@@ -13,7 +13,7 @@ Trigger: The user requests to view the population of people, people living in ci
 MAIN SUCCESS SCENARIO 
 1. User requests to view the population of people, people living in cities, and people not living in cities in each country.
 2. Census taker finds all the countries in the world and their population.
-3. Census taker finds all the cities in these countries and their population. 
+3. Census taker finds all the cities in these countries and their population.
 4. Find these two numbers and compare them.
 5. Census taker provides information to the user.
  ---------------------- 
