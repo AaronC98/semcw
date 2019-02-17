@@ -3,7 +3,7 @@ USE CASE: 9 Produce a Report on the Population of Cities of a Given Region
 CHARACTERISTIC INFORMATION
 
 Goal in Context
-As a census taker, I've been tasked with producing this SQL statement that shows the results of the
+As a Census Taker, I've been tasked with producing this SQL statement that shows the results of the
 top populated cities in a region provided by a user so we have adequate information for the new system.
 
 Scope
