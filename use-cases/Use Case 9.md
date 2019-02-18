@@ -35,7 +35,7 @@ Census taker provides report to organisation.
 
 EXTENSIONS
 Region does not exist:
-Team members informs user their geography is full of pish, no such region exists.
+Team members informs user that no such region exists and double checks they were given the correct region.
 
 SUB-VARIATIONS
 None.
