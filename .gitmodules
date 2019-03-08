@@ -4,3 +4,6 @@
 [submodule "db/semcw_db"]
 	path = db/semcw_db
 	url = https://github.com/AaronC98/semcw_db
+[submodule "semcw_db"]
+	path = semcw_db
+	url = https://github.com/AaronC98/semcw_db
