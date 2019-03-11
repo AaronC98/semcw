@@ -117,11 +117,7 @@ public class App {
                     String.format("%-10s %-20s",
                             country.Name, country.Population);
             System.out.println(ctry_string);
-
-
-
-
-
+            
         }
     }
 }
