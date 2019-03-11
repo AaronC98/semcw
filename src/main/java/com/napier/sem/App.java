@@ -57,7 +57,7 @@ public class App {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/employees?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -144,7 +144,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, CountryCode, District, Population FROM employees "
+                    "SELECT Name, CountryCode, District, Population FROM city "
                             + "WHERE ID = " + ID;
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);

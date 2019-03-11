@@ -22,9 +22,9 @@ public class AppIntegrationTest
     @Test
     void testGetEmployee()
     {
-        City city = app.getCity(1);
-        assertEquals(city.name, "Kabul");
-        assertEquals(city.CountryCode, "AFG");
-        assertEquals(city.population, 1780000);
+        City city = app.getCity(12);
+        assertEquals(city.name, "Breda");
+        assertEquals(city.CountryCode, "NLD");
+        assertEquals(city.population, 160398);
     }
 }
