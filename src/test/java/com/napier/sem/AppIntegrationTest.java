@@ -18,7 +18,7 @@ public class AppIntegrationTest
         app = new App();
         app.connect("db");
     }
-
+/*
     @Test
     void testGetEmployee()
     {
@@ -27,4 +27,5 @@ public class AppIntegrationTest
         assertEquals(city.CountryCode, "NLD");
         assertEquals(city.population, 160398);
     }
+ */
 }
