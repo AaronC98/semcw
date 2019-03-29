@@ -16,16 +16,16 @@ public class AppIntegrationTest
     static void init()
     {
         app = new App();
-        app.connect("db");
+        app.connect("localhost:33060");
     }
-/*
+
     @Test
-    void testGetEmployee()
+    void testGetCity()
     {
         City city = app.getCity(12);
         assertEquals(city.name, "Breda");
         assertEquals(city.CountryCode, "NLD");
         assertEquals(city.population, 160398);
     }
- */
+
 }
