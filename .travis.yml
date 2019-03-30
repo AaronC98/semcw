@@ -15,41 +15,53 @@ services:
   - docker
 
 install:
+  # Build database image.
   - docker build -t database db/.
+  # Run the database image.
   - docker run --rm -d -e MYSQL_ROOT_PASSWORD=example -p 33060:3306 database
+  # Build and install the application.
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 before_script:
+  # Clean any files.
   - mvn clean
 
+# Job stages
 jobs:
   include:
+    # Unit test stage.
     - stage: unit tests
       install: skip
       jdk: oraclejdk11
+      # Tell Maven to run the unit tests.
       script: mvn test -Dtest=com.napier.sem.AppTest
+    # Integration test stage.
     - stage: integration tests
       jdk: oraclejdk11
+      # Tell Maven to run the integration tests.
       script: mvn test -Dtest=com.napier.sem.AppIntegrationTest
+    # GitHub release stage.
     - stage: GitHub Release
       install: skip
       jdk: oraclejdk11
       script:
         - echo "Deploying to GitHub Releases"
+        # Package the Application.
         - mvn package -DskipTests=true -Dmaven.javadoc.skip=true
       before_deploy:
-        # Set up git user name and tag this commit
+        # Set our Git user name and email.
         - git config --local user.name "AaronC98"
         - git config --local user.email "aaron.jcam98@gmail.com"
-        # Create temporary tag from date and Git log.
+        # Create unique tag for the commit.
         - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y-%m-%d')-$(git log --format=%h -1)}
-        # Set tag
+        # Tag the commit.
         - git tag $TRAVIS_TAG
       deploy:
         provider: releases
-        api_key: $GITHUB_OAUTH_TOKEN
-        # Copy built JAR file.  JAR built in $TRAVIS_BUILD_DIR/
-        file: $TRAVIS_BUILD_DIR/target/seMethods.jar
+        # Token saved on Travis.
+        api_key: "$GITHUB_OAUTH_TOKEN"
+        # File to add to the release.
+        file: "$TRAVIS_BUILD_DIR/target/seMethods.jar"
         skip_cleanup: true
     - stage: Google Cloud Deploy
       install: skip
@@ -91,7 +103,6 @@ stages:
     if: branch = master
   - name: Google Cloud Deploy
     if: branch = master
-
 
 after_success:
   # Push code coverage data to codecov.
