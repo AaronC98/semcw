@@ -75,7 +75,7 @@ stages:
   - unit tests
   - integration tests
   - name: GitHub Release
-    if: branch = master
+    if: branch = Master
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 before_install:
