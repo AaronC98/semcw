@@ -1,8 +1,16 @@
 package com.napier.sem;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.sql.*;
 import java.util.ArrayList;
 
+@SpringBootApplication
+@RestController
 public class App {
     public static void main(String[] args) {
         // Create new Application
@@ -15,6 +23,8 @@ public class App {
             a.connect(args[0]);
         }
 
+        SpringApplication.run(App.class, args);
+
         System.out.println("All Countries in the World: ");
         ArrayList<Country> countries = a.populationWorldDesc();
         a.displayCountry(countries);
@@ -26,12 +36,12 @@ public class App {
     /**
      * Connection to MySQL database.
      */
-    private Connection con = null;
+    private static Connection con = null;
 
     /**
      * Connect to the MySQL database.
      */
-    public void connect(String location) {
+    public static void connect(String location) {
         try {
             // Load Database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -62,7 +72,7 @@ public class App {
     /**
      * Disconnect from the MySQL database.
      */
-    public void disconnect() {
+    public static void disconnect() {
         if (con != null) {
             try {
                 // Close connection
