@@ -57,6 +57,7 @@
           # Set the project we will work in.
           - gcloud config set project semethods-236115
           # Set the zone to work in.
+            - gcloud config set compute/zone europe-west2-b
             # Assign project ID to a variable to make life easier
             - export PROJECT_ID="$(gcloud config get-value project -q)"
             # Authenticate against Google's Docker image manager.
