@@ -25,10 +25,17 @@ public class App {
 
         SpringApplication.run(App.class, args);
 
+        //Listing all countries in the world in descending order.
         System.out.println("All Countries in the World: ");
         ArrayList<Country> countries = a.populationWorldDesc();
         a.displayCountry(countries);
 
+        //Listing all cities in a region
+        String region = "Nordic Countries";
+        System.out.println("\nListing all cities in " + region);
+        ArrayList<City> citiesInRegion = a.CitiesInRegionDesc(region);
+        a.displayCities(citiesInRegion);
+        
         // Disconnect from database
         a.disconnect();
     }
@@ -131,6 +138,57 @@ public class App {
             
         }
     }
+
+    public ArrayList<City>CitiesInRegionDesc(String region)
+    {
+        try {
+
+            ArrayList<City> cities = new ArrayList<City>();
+
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+
+                    "SELECT city.Name, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE country.Region = '" + region +"' "
+                            + "AND  city.CountryCode = country.Code "
+                            + "ORDER BY Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while (rset.next())
+            {
+                City city = new City();
+                city.name = rset.getString("city.Name");
+                city.district = rset.getString("city.District");
+                city.population = rset.getInt("city.Population");
+                cities.add(city);
+            }
+            return cities;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+    public void displayCities(ArrayList<City> cities) {
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s", "Name", "District", "Population"));
+        // Loop over all employees in the list
+        for (City city : cities) {
+            String emp_string =
+                    String.format("%-10s %-15s %-20s",
+                            city.name, city.district, city.population);
+            System.out.println(emp_string);
+        }
+    }
+
+
 
     public City getCity(int ID)
     {
