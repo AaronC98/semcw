@@ -24,18 +24,27 @@ public class App {
         }
 
         SpringApplication.run(App.class, args);
-
+/*
         //Listing all countries in the world in descending order.
         System.out.println("All Countries in the World: ");
         ArrayList<Country> countries = a.populationWorldDesc();
         a.displayCountry(countries);
 
-        //Listing all cities in a region
+        //Listing all cities in a region.
         String region = "Nordic Countries";
-        System.out.println("\nListing all cities in " + region);
+        System.out.println("\nAll cities in " + region);
         ArrayList<City> citiesInRegion = a.CitiesInRegionDesc(region);
         a.displayCities(citiesInRegion);
-        
+
+*/
+        //Listing all countries in a region in descending order.
+        String region = "Nordic Countries";
+        System.out.println("\nAll Countries in" + region + ": ");
+        ArrayList<Country> AllCountriesInRegion = a.AllCountriesInRegion(region);
+        a.displayCountriesByRegion(AllCountriesInRegion);
+
+
+
         // Disconnect from database
         a.disconnect();
     }
@@ -176,6 +185,38 @@ public class App {
         }
     }
 
+    public ArrayList<Country> AllCountriesInRegion(String region) {
+        try {
+
+            ArrayList<Country> countries = new ArrayList<Country>();
+
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+
+                    "SELECT Name, Region, Population "
+                            + "FROM country "
+                            + "WHERE Region = '" + region + "' "
+                            + "ORDER BY Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while (rset.next()) {
+                Country country = new Country();
+                country.Name = rset.getString("Name");
+                country.region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
     public void displayCities(ArrayList<City> cities) {
         // Print header
         System.out.println(String.format("%-10s %-15s %-20s", "Name", "District", "Population"));
@@ -187,8 +228,17 @@ public class App {
             System.out.println(emp_string);
         }
     }
-
-
+    public void displayCountriesByRegion(ArrayList<Country> countries) {
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s", "Name", "Region", "Population"));
+        // Loop over all employees in the list
+        for (Country country : countries) {
+            String emp_string =
+                    String.format("%-10s %-15s %-20s",
+                            country.Name, country.region, country.Population);
+            System.out.println(emp_string);
+        }
+    }
 
     public City getCity(int ID)
     {
