@@ -41,12 +41,23 @@ public class App {
         System.out.println("\nAll Countries in" + region + ": ");
         ArrayList<Country> AllCountriesInRegion = a.AllCountriesInRegion(region);
         a.displayCountriesByRegion(AllCountriesInRegion);
-*/
+
         //Listing top N countries in the world
         int n = 5;
         System.out.println("\nTop " + n + " countries in the world.");
         ArrayList<Country> topNCountriesInWorld = a.topNWorld(n);
         a.displayCountries(topNCountriesInWorld);
+
+        int n = 5;
+        System.out.println("\nTop " + n + " countries in the world.");
+        */
+
+        //Listing top N capitals per continent.
+        int n = 5;
+        System.out.println("\nTop " + n + " capitals per continent:");
+        ArrayList<City> topNCapitalsContinent = a.topNCapitalsContinent(n);
+        a.displayCities(topNCapitalsContinent);
+        
 
         // Disconnect from database
         a.disconnect();
@@ -277,6 +288,43 @@ public class App {
                     String.format("%-10s %-15s %-20s",
                             country.Name, country.Continent, country.Population);
             System.out.println(emp_string);
+        }
+    }
+
+    public ArrayList<City> topNCapitalsContinent(int n)
+    {
+        try {
+            String[] continents = new String[]{"Asia", "Europe", "North America", "Africa", "Oceania", "Antarctica", "South America"};
+
+            ArrayList<City> cities = new ArrayList<City>();
+
+            for (String cont : continents) {
+                // Create an SQL statement
+                Statement stmt = con.createStatement();
+                // Create string for SQL statement
+                String strSelect =
+                        "SELECT city.Name, city.District, city.Population "
+                                + "FROM city, country "
+                                + "WHERE country.Continent = '" + cont +"' "
+                                + "AND city.ID = country.Capital "
+                                + "ORDER BY Population DESC LIMIT " + n;
+                // Execute SQL statement
+                ResultSet rset = stmt.executeQuery(strSelect);
+                // Extract employee information
+
+                while (rset.next()) {
+                    City city = new City();
+                    city.name = rset.getString("Name");
+                    city.district = rset.getString("District");
+                    city.population = rset.getInt("Population");
+                    cities.add(city);
+                }
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
         }
     }
 
