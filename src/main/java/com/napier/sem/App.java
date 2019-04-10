@@ -18,12 +18,12 @@ public class App {
 
         // Connect to database
         if (args.length < 1) {
-            a.connect("35.246.7.68:3306");
+            a.connect("localhost:33060");
         } else {
             a.connect(args[0]);
         }
 
-        SpringApplication.run(App.class, args);
+
 /*
         //Listing all countries in the world in descending order.
         System.out.println("All Countries in the World: ");
@@ -65,7 +65,7 @@ public class App {
         //Listing the population of people, people in cities, and people not living in cities in each continent
         System.out.println("\nListing the population of people, people in cities, and people not living in cities in each continent.");
         ArrayList<Population> populationReportRegion = a.populationReportRegion();
-        a.displayPopulation(populationReportRegion);
+        a.displayPop(populationReportRegion);
 
         // Disconnect from database
         a.disconnect();
@@ -121,6 +121,73 @@ public class App {
         }
     }
 
+    public void displayCountry(ArrayList<Country> countries) {
+        // Check employees is not null
+        if (countries == null)
+        {
+            System.out.println("No countries.");
+            return;
+        }
+        // Print header
+        System.out.println(String.format("%-10s %-20s", "Name", "Population"));
+        // Loop over all employees in the list
+        for (Country country : countries) {
+            if (country == null)
+                continue;
+            String ctry_string =
+                    String.format("%-10s %-20s",
+                            country.Name, country.Population);
+            System.out.println(ctry_string);
+
+        }
+    }
+
+    public void displayCountries(ArrayList<Country> countries) {
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s", "Name", "Continent", "Population"));
+        // Loop over all employees in the list
+        for (Country country : countries) {
+            String emp_string =
+                    String.format("%-10s %-15s %-20s",
+                            country.Name, country.Continent, country.Population);
+            System.out.println(emp_string);
+        }
+    }
+
+    public void displayCountriesByRegion(ArrayList<Country> countries) {
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s", "Name", "Region", "Population"));
+        // Loop over all employees in the list
+        for (Country country : countries) {
+            String emp_string =
+                    String.format("%-10s %-15s %-20s",
+                            country.Name, country.region, country.Population);
+            System.out.println(emp_string);
+        }
+    }
+
+    public void displayCities(ArrayList<City> cities) {
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s", "Name", "District", "Population"));
+        // Loop over all employees in the list
+        for (City city : cities) {
+            String emp_string =
+                    String.format("%-10s %-15s %-20s",
+                            city.name, city.district, city.population);
+            System.out.println(emp_string);
+        }
+    }
+
+    public void displayPop(ArrayList<Population> pops){
+        System.out.println(String.format("%-15s %-20s %-15s %-20s","Continent", "Continent Pop", "City Pop", "Non City Pop"));
+        for (Population pop : pops) {
+            String emp_string =
+                    String.format("%-15s %-20s %-15s %-20s",
+                            pop.population, pop.regionPop, pop.cityPop, pop.nonCityPop);
+            System.out.println(emp_string);
+        }
+    }
+
     public ArrayList<Country> populationWorldDesc() {
         try {
             // Create an SQL statement
@@ -149,27 +216,6 @@ public class App {
         }
     }
 
-    public void displayCountry(ArrayList<Country> countries) {
-        // Check employees is not null
-        if (countries == null)
-        {
-            System.out.println("No countries.");
-            return;
-        }
-        // Print header
-        System.out.println(String.format("%-10s %-20s", "Name", "Population"));
-        // Loop over all employees in the list
-        for (Country country : countries) {
-            if (country == null)
-                continue;
-            String ctry_string =
-                    String.format("%-10s %-20s",
-                            country.Name, country.Population);
-            System.out.println(ctry_string);
-
-        }
-    }
-
     public ArrayList<City>CitiesInRegionDesc(String region)
     {
         try {
@@ -181,7 +227,7 @@ public class App {
             // Create string for SQL statement
             String strSelect =
 
-                    "SELECT city.Name, city.District, city.Population "
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE country.Region = '" + region +"' "
                             + "AND  city.CountryCode = country.Code "
@@ -193,6 +239,7 @@ public class App {
             {
                 City city = new City();
                 city.name = rset.getString("city.Name");
+                city.CountryCode = rset.getString("city.CountryCode");
                 city.district = rset.getString("city.District");
                 city.population = rset.getInt("city.Population");
                 cities.add(city);
@@ -264,40 +311,10 @@ public class App {
         }
     }
 
-    public void displayCities(ArrayList<City> cities) {
-        // Print header
-        System.out.println(String.format("%-10s %-15s %-20s", "Name", "District", "Population"));
-        // Loop over all employees in the list
-        for (City city : cities) {
-            String emp_string =
-                    String.format("%-10s %-15s %-20s",
-                            city.name, city.district, city.population);
-            System.out.println(emp_string);
-        }
-    }
-    public void displayCountriesByRegion(ArrayList<Country> countries) {
-        // Print header
-        System.out.println(String.format("%-10s %-15s %-20s", "Name", "Region", "Population"));
-        // Loop over all employees in the list
-        for (Country country : countries) {
-            String emp_string =
-                    String.format("%-10s %-15s %-20s",
-                            country.Name, country.region, country.Population);
-            System.out.println(emp_string);
-        }
-    }
 
-    public void displayCountries(ArrayList<Country> countries) {
-        // Print header
-        System.out.println(String.format("%-10s %-15s %-20s", "Name", "Continent", "Population"));
-        // Loop over all employees in the list
-        for (Country country : countries) {
-            String emp_string =
-                    String.format("%-10s %-15s %-20s",
-                            country.Name, country.Continent, country.Population);
-            System.out.println(emp_string);
-        }
-    }
+
+
+
 
     public ArrayList<City> topNCapitalsContinent(int n)
     {
@@ -372,46 +389,41 @@ public class App {
         }
     }
 
-    public void displayPop(ArrayList<Population> pops){
-        System.out.println(String.format("%-15s %-20s %-15s %-20s","Continent", "Continent Pop", "City Pop", "Not City Pop"));
-        for (Population pop : pops) {
-            String emp_string =
-                    String.format("%-15s %-20s %-15s %-20s",
-                            pop.population, pop.regoionPop, pop.cityPop, pop.nonCityPop);
-            System.out.println(emp_string);
-        }
-    }
 
-    public City getCity(int ID)
-    {
-        try
-        {
+
+
+
+    public ArrayList<Population> populationReportRegion(){
+        try {
+
+            ArrayList<Population> pops = new ArrayList<Population>();
+
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, CountryCode, District, Population FROM city "
-                            + "WHERE ID = " + ID;
+                    "SELECT Region, SUM(country.Population) As Cont, SUM(city.Population) As City, (SUM(country.Population) - SUM(city.Population)) As NonCityPop "
+                            + "FROM country, city "
+                            + "GROUP BY Region";
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                City city = new City();
-                city.name = rset.getString("Name");
-                city.CountryCode = rset.getString("CountryCode");
-                city.population = rset.getInt("Population");
-                return city;
+            // Extract employee information
+
+            while (rset.next()) {
+                Population pop = new Population();
+                pop.population =  rset.getString("Continent");
+                pop.regionPop = rset.getString("Cont");
+                pop.cityPop = rset.getString("City");
+                pop.nonCityPop = rset.getString("Not City Pop");
+                pops.add(pop);
             }
-            else
-                return null;
-        }
-        catch (Exception e)
-        {
+            return pops;
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city details");
+            System.out.println("Failed to get details");
             return null;
         }
     }
+
 }
