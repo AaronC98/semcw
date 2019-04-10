@@ -53,14 +53,18 @@ public class App {
         System.out.println("\nTop " + n + " capitals per continent:");
         ArrayList<City> topNCapitalsContinent = a.topNCapitalsContinent(n);
         a.displayCities(topNCapitalsContinent);
-*/
 
         //Listing top N cities per continent.
         int n = 5;
         System.out.println("\nTop " + n + " cities per continent:");
         ArrayList<City> topNCitiesContinent = a.topnNCitiesContinent(n);
         a.displayCities(topNCitiesContinent);
+*/
 
+        int n = 5;
+        System.out.println("\nTop " + n + " capital cities in the world:");
+        ArrayList<City> topNCapitalsWorld = a.topNCapitalsWorld(n);
+        a.displayCities(topNCapitalsWorld);
 
         // Disconnect from database
         a.disconnect();
@@ -252,6 +256,32 @@ public class App {
                 topNcountries.add(country);
             }
             return topNcountries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+    public ArrayList<City> topNCapitalsWorld(int n) {
+        try {
+            Statement stmt = con.createStatement();
+            String strtopNWorld =
+                    "SELECT city.Name, District, city.Population "
+                            + "FROM country, city "
+                            + "WHERE city.ID = country.Capital "
+                            + "ORDER BY city.Population DESC LIMIT " + n;
+
+            ResultSet rset = stmt.executeQuery(strtopNWorld);
+            ArrayList<City> cities = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+            return cities;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get details");
