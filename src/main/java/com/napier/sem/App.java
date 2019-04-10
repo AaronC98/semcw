@@ -18,11 +18,12 @@ public class App {
 
         // Connect to database
         if (args.length < 1) {
-            a.connect("localhost: 33060");
+            a.connect("35.246.7.68:3306");
         } else {
             a.connect(args[0]);
         }
 
+        SpringApplication.run(App.class, args);
 /*
         //Listing all countries in the world in descending order.
         System.out.println("All Countries in the World: ");
@@ -47,23 +48,19 @@ public class App {
         ArrayList<Country> topNCountriesInWorld = a.topNWorld(n);
         a.displayCountries(topNCountriesInWorld);
 
+
         //Listing top N capitals per continent.
         int n = 5;
         System.out.println("\nTop " + n + " capitals per continent:");
         ArrayList<City> topNCapitalsContinent = a.topNCapitalsContinent(n);
         a.displayCities(topNCapitalsContinent);
+*/
 
         //Listing top N cities per continent.
         int n = 5;
         System.out.println("\nTop " + n + " cities per continent:");
         ArrayList<City> topNCitiesContinent = a.topnNCitiesContinent(n);
         a.displayCities(topNCitiesContinent);
-*/
-        //Listing top N cities in the world.
-        int n = 5;
-        System.out.println("\nTop " + n + " cities in the world:");
-        ArrayList<City> topNCitiesWorld = a.topNCitiesWorld(n);
-        a.displayCities(topNCitiesWorld);
 
         // Disconnect from database
         a.disconnect();
@@ -334,40 +331,6 @@ public class App {
         }
     }
 
-    public ArrayList<City> topNCitiesWorld(int n)
-    {
-        try {
-
-            ArrayList<City> cities = new ArrayList<City>();
-
-                // Create an SQL statement
-                Statement stmt = con.createStatement();
-                // Create string for SQL statement
-                String strSelect =
-                        "SELECT city.Name, city.District, city.Population "
-                                + "FROM city, country "
-                                + "WHERE city.CountryCode = country.Code "
-                                + "ORDER BY Population DESC LIMIT " + n;
-                // Execute SQL statement
-                ResultSet rset = stmt.executeQuery(strSelect);
-                // Extract employee information
-
-                while (rset.next()) {
-                    City city = new City();
-                    city.name = rset.getString("Name");
-                    city.district = rset.getString("District");
-                    city.population = rset.getInt("Population");
-                    cities.add(city);
-                }
-
-            return cities;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get details");
-            return null;
-        }
-    }
-
     public ArrayList<City> topnNCitiesContinent(int n)
     {
         try {
@@ -382,8 +345,7 @@ public class App {
                 String strSelect =
                         "SELECT city.Name, city.District, city.Population "
                                 + "FROM city, country "
-                                + "WHERE Continent = '" + cont +"' "
-                                + "AND city.CountryCode = country.Code "
+                                + "WHERE country.Continent = '" + cont +"' "
                                 + "ORDER BY Population DESC LIMIT " + n;
                 // Execute SQL statement
                 ResultSet rset = stmt.executeQuery(strSelect);
