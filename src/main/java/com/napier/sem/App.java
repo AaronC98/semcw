@@ -377,7 +377,7 @@ public class App {
         for (Population pop : pops) {
             String emp_string =
                     String.format("%-15s %-20s %-15s %-20s",
-                            pop.continent, pop.continentPopulation, pop.cityPopulation, pop.nonCityPopulation);
+                            pop.population, pop.regoionPop, pop.cityPop, pop.nonCityPop);
             System.out.println(emp_string);
         }
     }
