@@ -62,6 +62,11 @@ public class App {
         ArrayList<City> topNCitiesContinent = a.topnNCitiesContinent(n);
         a.displayCities(topNCitiesContinent);
 
+        //Listing the population of people, people in cities, and people not living in cities in each continent
+        System.out.println("\nListing the population of people, people in cities, and people not living in cities in each continent.");
+        ArrayList<Population> populationReportRegion = a.populationReportRegion();
+        a.displayPopulation(populationReportRegion);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -364,6 +369,16 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get details");
             return null;
+        }
+    }
+
+    public void displayPop(ArrayList<Population> pops){
+        System.out.println(String.format("%-15s %-20s %-15s %-20s","Continent", "Continent Pop", "City Pop", "Not City Pop"));
+        for (Population pop : pops) {
+            String emp_string =
+                    String.format("%-15s %-20s %-15s %-20s",
+                            pop.continent, pop.continentPopulation, pop.cityPopulation, pop.nonCityPopulation);
+            System.out.println(emp_string);
         }
     }
 
