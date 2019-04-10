@@ -121,73 +121,6 @@ public class App {
         }
     }
 
-    public void displayCountry(ArrayList<Country> countries) {
-        // Check employees is not null
-        if (countries == null)
-        {
-            System.out.println("No countries.");
-            return;
-        }
-        // Print header
-        System.out.println(String.format("%-10s %-20s", "Name", "Population"));
-        // Loop over all employees in the list
-        for (Country country : countries) {
-            if (country == null)
-                continue;
-            String ctry_string =
-                    String.format("%-10s %-20s",
-                            country.Name, country.Population);
-            System.out.println(ctry_string);
-
-        }
-    }
-
-    public void displayCountries(ArrayList<Country> countries) {
-        // Print header
-        System.out.println(String.format("%-10s %-15s %-20s", "Name", "Continent", "Population"));
-        // Loop over all employees in the list
-        for (Country country : countries) {
-            String emp_string =
-                    String.format("%-10s %-15s %-20s",
-                            country.Name, country.Continent, country.Population);
-            System.out.println(emp_string);
-        }
-    }
-
-    public void displayCountriesByRegion(ArrayList<Country> countries) {
-        // Print header
-        System.out.println(String.format("%-10s %-15s %-20s", "Name", "Region", "Population"));
-        // Loop over all employees in the list
-        for (Country country : countries) {
-            String emp_string =
-                    String.format("%-10s %-15s %-20s",
-                            country.Name, country.region, country.Population);
-            System.out.println(emp_string);
-        }
-    }
-
-    public void displayCities(ArrayList<City> cities) {
-        // Print header
-        System.out.println(String.format("%-10s %-15s %-20s", "Name", "District", "Population"));
-        // Loop over all employees in the list
-        for (City city : cities) {
-            String emp_string =
-                    String.format("%-10s %-15s %-20s",
-                            city.name, city.district, city.population);
-            System.out.println(emp_string);
-        }
-    }
-
-    public void displayPop(ArrayList<Population> pops){
-        System.out.println(String.format("%-15s %-20s %-15s %-20s","Continent", "Continent Pop", "City Pop", "Non City Pop"));
-        for (Population pop : pops) {
-            String emp_string =
-                    String.format("%-15s %-20s %-15s %-20s",
-                            pop.population, pop.regionPop, pop.cityPop, pop.nonCityPop);
-            System.out.println(emp_string);
-        }
-    }
-
     public ArrayList<Country> populationWorldDesc() {
         try {
             // Create an SQL statement
@@ -216,6 +149,27 @@ public class App {
         }
     }
 
+    public void displayCountry(ArrayList<Country> countries) {
+        // Check employees is not null
+        if (countries == null)
+        {
+            System.out.println("No countries.");
+            return;
+        }
+        // Print header
+        System.out.println(String.format("%-10s %-20s", "Name", "Population"));
+        // Loop over all employees in the list
+        for (Country country : countries) {
+            if (country == null)
+                continue;
+            String ctry_string =
+                    String.format("%-10s %-20s",
+                            country.Name, country.Population);
+            System.out.println(ctry_string);
+
+        }
+    }
+
     public ArrayList<City>CitiesInRegionDesc(String region)
     {
         try {
@@ -227,7 +181,7 @@ public class App {
             // Create string for SQL statement
             String strSelect =
 
-                    "SELECT city.Name, city.CountryCode, city.District, city.Population "
+                    "SELECT city.Name, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE country.Region = '" + region +"' "
                             + "AND  city.CountryCode = country.Code "
@@ -239,7 +193,6 @@ public class App {
             {
                 City city = new City();
                 city.name = rset.getString("city.Name");
-                city.CountryCode = rset.getString("city.CountryCode");
                 city.district = rset.getString("city.District");
                 city.population = rset.getInt("city.Population");
                 cities.add(city);
@@ -311,10 +264,40 @@ public class App {
         }
     }
 
+    public void displayCities(ArrayList<City> cities) {
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s", "Name", "District", "Population"));
+        // Loop over all employees in the list
+        for (City city : cities) {
+            String emp_string =
+                    String.format("%-10s %-15s %-20s",
+                            city.name, city.district, city.population);
+            System.out.println(emp_string);
+        }
+    }
+    public void displayCountriesByRegion(ArrayList<Country> countries) {
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s", "Name", "Region", "Population"));
+        // Loop over all employees in the list
+        for (Country country : countries) {
+            String emp_string =
+                    String.format("%-10s %-15s %-20s",
+                            country.Name, country.region, country.Population);
+            System.out.println(emp_string);
+        }
+    }
 
-
-
-
+    public void displayCountries(ArrayList<Country> countries) {
+        // Print header
+        System.out.println(String.format("%-10s %-15s %-20s", "Name", "Continent", "Population"));
+        // Loop over all employees in the list
+        for (Country country : countries) {
+            String emp_string =
+                    String.format("%-10s %-15s %-20s",
+                            country.Name, country.Continent, country.Population);
+            System.out.println(emp_string);
+        }
+    }
 
     public ArrayList<City> topNCapitalsContinent(int n)
     {
@@ -389,7 +372,15 @@ public class App {
         }
     }
 
-
+    public void displayPop(ArrayList<Population> pops){
+        System.out.println(String.format("%-15s %-20s %-15s %-20s","Continent", "Continent Pop", "City Pop", "Non City Pop"));
+        for (Population pop : pops) {
+            String emp_string =
+                    String.format("%-15s %-20s %-15s %-20s",
+                            pop.population, pop.regionPop, pop.cityPop, pop.nonCityPop);
+            System.out.println(emp_string);
+        }
+    }
 
 
 
