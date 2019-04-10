@@ -18,7 +18,7 @@ public class App {
 
         // Connect to database
         if (args.length < 1) {
-            a.connect("35.246.7.68:3306");
+            a.connect("35.242.141.6:3306");
         } else {
             a.connect(args[0]);
         }
@@ -48,16 +48,19 @@ public class App {
         ArrayList<Country> topNCountriesInWorld = a.topNWorld(n);
         a.displayCountries(topNCountriesInWorld);
 
-        int n = 5;
-        System.out.println("\nTop " + n + " countries in the world.");
-        */
-
         //Listing top N capitals per continent.
         int n = 5;
         System.out.println("\nTop " + n + " capitals per continent:");
         ArrayList<City> topNCapitalsContinent = a.topNCapitalsContinent(n);
         a.displayCities(topNCapitalsContinent);
-        
+*/
+
+        //Listing top N cities per continent.
+        int n = 5;
+        System.out.println("\nTop " + n + " cities per continent:");
+        ArrayList<City> topNCitiesContinent = a.topnNCitiesContinent(n);
+        a.displayCities(topNCitiesContinent);
+
 
         // Disconnect from database
         a.disconnect();
@@ -307,6 +310,43 @@ public class App {
                                 + "FROM city, country "
                                 + "WHERE country.Continent = '" + cont +"' "
                                 + "AND city.ID = country.Capital "
+                                + "ORDER BY Population DESC LIMIT " + n;
+                // Execute SQL statement
+                ResultSet rset = stmt.executeQuery(strSelect);
+                // Extract employee information
+
+                while (rset.next()) {
+                    City city = new City();
+                    city.name = rset.getString("Name");
+                    city.district = rset.getString("District");
+                    city.population = rset.getInt("Population");
+                    cities.add(city);
+                }
+            }
+            return cities;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+    public ArrayList<City> topnNCitiesContinent(int n)
+    {
+        try {
+            String[] continents = new String[]{"Asia", "Europe", "North America", "Africa", "Oceania", "Antarctica", "South America"};
+
+            ArrayList<City> cities = new ArrayList<City>();
+
+            for (String cont : continents) {
+                // Create an SQL statement
+                Statement stmt = con.createStatement();
+                // Create string for SQL statement
+                String strSelect =
+                        "SELECT city.Name, city.District, city.Population "
+                                + "FROM city, country "
+                                + "WHERE Continent = '" + cont +"' "
+                                + "AND city.CountryCode = country.Code "
                                 + "ORDER BY Population DESC LIMIT " + n;
                 // Execute SQL statement
                 ResultSet rset = stmt.executeQuery(strSelect);
