@@ -18,35 +18,53 @@ public class AppTest
         app = new App();
     }
 
-    @Test
-    void printSalariesTestNull()
-    {
-        app.displayCountry(null);
-    }
-
-    @Test
-    void printSalariesTestEmpty()
-    {
-        ArrayList<Country> countries = new ArrayList<Country>();
-        app.displayCountry(countries);
-    }
-
-    @Test
-    void printSalariesTestContainsNull()
-    {
-        ArrayList<Country> countries = new ArrayList<Country>();
-        countries.add(null);
-        app.displayCountry(countries);
-    }
-
-    @Test
-    void printSalaries()
-    {
-        ArrayList<Country> countries = new ArrayList<Country>();
+   @Test
+    void displayCountries() {
+        ArrayList<Country> countries = new ArrayList<>();
         Country country = new Country();
-        country.Name="Kenya";
-        country.Population= 200000;
+        country.Name = "Sweden";
+        country.Continent = "Europe";
+        country.Population = 8861400;
         countries.add(country);
-        app.displayCountry(countries);
-    }
+        app.displayCountries(countries);
+   }
+
+   @Test
+   void displayCities() {
+        ArrayList<City> cities = new ArrayList<City>();
+        City city = new City();
+        city.name = "Edinburgh";
+        city.district = "West Lothian";
+        city.population = 100000;
+
+        cities.add(city);
+        app.displayCities(cities);
+   }
+
+   @Test
+    void displayCountriesByRegion() {
+       ArrayList<Country> countries = new ArrayList<>();
+       Country country = new Country();
+       Country country1 = new Country();
+       Country country2 = new Country();
+
+       country.Name = "Sweden";
+       country.Continent = "Europe";
+       country.Population = 8861400;
+       countries.add(country);
+
+       country.Name = "Aruba";
+       country.Continent = "North America";
+       country.Population = 103000;
+       countries.add(country1);
+
+       country2.Name = "Malta";
+       country2.Continent = "Europe";
+       country2.Population = 380200;
+       countries.add(country2);
+
+       app.displayCountriesByRegion(countries);
+   }
+
+
 }
