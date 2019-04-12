@@ -47,7 +47,7 @@ public class App {
         a.displayCountries(topNCountriesInWorld);
 
         //Listing top N capitals per continent.
-        n = 5;
+        n = 10;
         System.out.println("\nTop " + n + " capitals per continent:");
         ArrayList<City> topNCapitalsContinent = a.topNCapitalsContinent(n);
         a.displayCities(topNCapitalsContinent);
