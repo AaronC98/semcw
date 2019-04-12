@@ -567,7 +567,7 @@ public class App {
             String strTopNCitiesInCountry =
                     "SELECT city.Name, city.District, city.Population "
                             + "FROM city, country "
-                            + "WHERE country = '" + country + "' "
+                            + "WHERE country.Name = '" + country + "' "
                             + "AND city.CountryCode = country.Code "
                             + "ORDER BY Population DESC LIMIT " + n;
 
