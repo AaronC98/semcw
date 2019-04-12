@@ -489,8 +489,8 @@ public class App {
             Statement stmt = con.createStatement();
             String strCitiesInDistrict =
                     "SELECT city.Name, city.District, city.Population "
-                            + "FROM city, district "
-                            + "WHERE District = '" + district + "' "
+                            + "FROM city, country "
+                            + "WHERE city.District = '" + district + "' "
                             + "AND city.CountryCode = country.Code "
                             + "ORDER BY Population DESC";
 
