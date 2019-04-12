@@ -594,7 +594,31 @@ public class App {
             return null;
         }
     }
+    // Andreas
+    public ArrayList<City> CapitalsWorldDesc(int n) {
+        try {
+            Statement stmt = con.createStatement();
+            String strtopNWorld =
+                    "SELECT Name, District,Population "
+                            + "FROM city, country "
+                            + "WHERE city.ID = country.Capital "
+                            + "ORDER BY Population DESC ";
 
+            ResultSet rset = stmt.executeQuery(strtopNWorld);
+            ArrayList<City> CapitalsWorldDesc = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                CapitalsWorldDesc.add(city);
+            }
+            return CapitalsWorldDesc;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
     }
 
 
