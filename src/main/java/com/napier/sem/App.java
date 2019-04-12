@@ -109,7 +109,10 @@ public class App {
         ArrayList<City> CapitalsWorldDesc = a.CapitalsWorldDesc(n);
         a.displayCities(CapitalsWorldDesc);
 
-
+        //Top N Capital Region
+        System.out.println("Top N Capital Region : ");
+        ArrayList<City> TopNCapital = a.TopNCapital(n);
+        a.displayCities(TopNCapital);
 
 
 //        //TO-DO
@@ -704,7 +707,34 @@ public class App {
             return null;
         }
     }
+// Andreas
+    public ArrayList<City> TopNCapital(String region, int n) {
+        try {
 
+            ArrayList<City> TopNCapital = new ArrayList<City>();
+            Statement stmt = con.createStatement();
+            String strtopNWorld =
+                    "SELECT Name, District,Population "
+                            + "FROM city, country "
+                            + "WHERE country.region = '"+ region +"' "
+                            + "AND city.ID = country.Capital "
+                            + "ORDER BY Population DESC LIMIT " + n;
+
+            ResultSet rset = stmt.executeQuery(strtopNWorld);
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                TopNCapital.add(city);
+            }
+            return TopNCapital;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
 
 
 
