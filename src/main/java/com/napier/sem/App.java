@@ -91,8 +91,8 @@ public class App {
 
         //Listing all the capitals in the world in descending order.
         System.out.println("All the capitals in the World: ");
-        ArrayList<Country> countries = a.populationWorldDesc();
-        a.displayCountry(countries);
+        ArrayList<Country> populationWorldDesc = a.populationWorldDesc();
+        a.displayCountry(populationWorldDesc);
 
 
 //        //TO-DO
