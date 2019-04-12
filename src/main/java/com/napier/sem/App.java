@@ -89,10 +89,13 @@ public class App {
         ArrayList<City> TopNCitiesInCountry = a.TopNCitiesInCountry(country, n);
         a.displayCities(TopNCitiesInCountry);
 
-        //Listing all the capitals in the world in descending order.
-        System.out.println("All the capitals in the World: ");
-        ArrayList<Country> populationWorldDesc = a.populationWorldDesc();
-        a.displayCountry(countries);
+        //The top N populated cities in a region
+        n = 5;
+        region = "Caribbean";
+        System.out.println("\nTop " + n + "cities in a region");
+        ArrayList<City> TopNCitiesInRegion = a.TopNCitiesInRegion(region, n);
+        a.displayCities(TopNCitiesInRegion);
+
 
 
 //        //TO-DO
@@ -594,27 +597,33 @@ public class App {
             return null;
         }
     }
-    // Andreas
-    public ArrayList<City> CapitalsWorldDesc(int n) {
-        try {
-            Statement stmt = con.createStatement();
-            String strtopNWorld =
-                    "SELECT Name, District,Population "
-                            + "FROM city, country "
-                            + "WHERE city.ID = country.Capital "
-                            + "ORDER BY Population DESC ";
 
-            ResultSet rset = stmt.executeQuery(strtopNWorld);
-            ArrayList<City> CapitalsWorldDesc = new ArrayList<City>();
+    //The top N populated capital cities in a region
+    public ArrayList<City> TopNCitiesInRegion(String region, int n) {
+        try {
+            ArrayList<City> cities = new ArrayList<>();
+
+            Statement stmt = con.createStatement();
+            String strTopNCitiesInRegion =
+                    "SELECT city.Name, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE country.Region = '" + region + "' "
+                            + "AND city.CountryCode = country.Code "
+                            + "ORDER BY Population DESC LIMIT " + n;
+
+            ResultSet rset = stmt.executeQuery(strTopNCitiesInRegion);
+
             while (rset.next()) {
                 City city = new City();
                 city.name = rset.getString("Name");
                 city.district = rset.getString("District");
                 city.population = rset.getInt("Population");
-                CapitalsWorldDesc.add(city);
+                cities.add(city);
             }
-            return CapitalsWorldDesc;
-        } catch (Exception e) {
+
+            return cities;
+        } catch (
+                Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get details");
             return null;
@@ -623,5 +632,3 @@ public class App {
 
 
 }
-
-
