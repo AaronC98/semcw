@@ -70,7 +70,6 @@ public class App {
         ArrayList<City> CitiesInContinent = a.CitiesInContinent(cont);
         a.displayCities(CitiesInContinent);
 
-
 //        //TO-DO
 //        //Listing the population of people, people in cities, and people not living in cities in each continent
 //        System.out.println("\nListing the population of people, people in cities, and people not living in cities in each continent.");
