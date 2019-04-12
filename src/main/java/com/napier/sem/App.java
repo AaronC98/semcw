@@ -227,7 +227,6 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-
                     "SELECT Name, Region, Population "
                             + "FROM country "
                             + "WHERE Region = '" + region + "' "
