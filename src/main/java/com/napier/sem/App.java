@@ -98,6 +98,13 @@ public class App {
 
 
 
+        //Listing all the countries in a continent descending order.
+        System.out.println("All the countries in a continent: ");
+        ArrayList<Country> CountriesContinentDesc = a.CountriesContinentDesc();
+        a.displayCountry(CountriesContinentDesc);
+
+
+
 //        //TO-DO
 //        //Listing the population of people, people in cities, and people not living in cities in each continent
 //        System.out.println("\nListing the population of people, people in cities, and people not living in cities in each continent.");
@@ -629,6 +636,37 @@ public class App {
             return null;
         }
     }
+    public ArrayList<Country> CountriesContinentDesc(String continents) {
+        try {
 
+            ArrayList<Country> countries = new ArrayList<Country>();
+
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+
+                    "SELECT Name, Continent, Population "
+                            + "FROM country "
+                            + "WHERE Continent = '" + continents + "' "
+                            + "ORDER BY Population DESC ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            while (rset.next()) {
+                Country country = new Country();
+                country.Name = rset.getString("Name");
+                country.region = rset.getString("Region");
+                country.Population = rset.getInt("Population");
+                countries.add(country);
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
 
 }
