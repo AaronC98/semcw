@@ -91,7 +91,7 @@ public class App {
 
         //The top N populated cities in a region
         n = 5;
-        region = "";
+        region = "Caribbean";
         System.out.println("\nTop " + n + "cities in a region");
         ArrayList<City> TopNCitiesInRegion = a.TopNCitiesInRegion(region, n);
         a.displayCities(TopNCitiesInRegion);
