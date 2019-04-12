@@ -70,6 +70,12 @@ public class App {
         ArrayList<City> CitiesInContinent = a.CitiesInContinent(cont);
         a.displayCities(CitiesInContinent);
 
+        //All Cities in a District largest population to smallest
+        String district = "Kabol";
+        System.out.println("\nAll cities in a district organised by largest population to smallest:");
+        ArrayList<City> CitiestInDistrict = a.CitiesInDistrict(district);
+        a.displayCities((CitiestInDistrict));
+
 
 //        //TO-DO
 //        //Listing the population of people, people in cities, and people not living in cities in each continent
@@ -458,6 +464,38 @@ public class App {
                             + "ORDER BY Population DESC";
 
             ResultSet rset = stmt.executeQuery(strCitiesInCont);
+
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+
+            return cities;
+        } catch (
+                Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+    //All the cities in a district organised by largest population to smallest
+    public ArrayList<City> CitiesInDistrict(String district) {
+        try {
+            ArrayList<City> cities = new ArrayList<>();
+
+            Statement stmt = con.createStatement();
+            String strCitiesInDistrict =
+                    "SELECT city.Name, city.District, city.Population "
+                            + "FROM city, district "
+                            + "WHERE District = '" + district + "' "
+                            + "AND city.CountryCode = country.Code "
+                            + "ORDER BY Population DESC";
+
+            ResultSet rset = stmt.executeQuery(strCitiesInDistrict);
 
             while (rset.next()) {
                 City city = new City();
