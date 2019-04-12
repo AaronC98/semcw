@@ -100,6 +100,7 @@ public class App {
 
         //Listing all the countries in a continent descending order.
         System.out.println("All the countries in a continent: ");
+        String continents ="Africa"
         ArrayList<Country> CountriesContinentDesc = a.CountriesContinentDesc();
         a.displayCountry(CountriesContinentDesc);
 
@@ -657,7 +658,7 @@ public class App {
             while (rset.next()) {
                 Country country = new Country();
                 country.Name = rset.getString("Name");
-                country.region = rset.getString("Region");
+                country.Continent = rset.getString("Continent");
                 country.Population = rset.getInt("Population");
                 countries.add(country);
             }
@@ -668,5 +669,7 @@ public class App {
             return null;
         }
     }
+
+
 
 }
