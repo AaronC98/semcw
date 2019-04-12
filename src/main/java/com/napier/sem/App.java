@@ -64,6 +64,13 @@ public class App {
         ArrayList<City> topNCitiesContinent = a.topnNCitiesContinent(n);
         a.displayCities(topNCitiesContinent);
 
+        //All Cities in a Continent largest population to smallest
+        String cont = "Asia";
+        System.out.println("\nAll cities in a continent organised by largest population to smallest:");
+        ArrayList<City> CitiesInContinent = a.CitiesInContinent(cont);
+        a.displayCities(CitiesInContinent);
+
+
 //        //TO-DO
 //        //Listing the population of people, people in cities, and people not living in cities in each continent
 //        System.out.println("\nListing the population of people, people in cities, and people not living in cities in each continent.");
@@ -154,8 +161,7 @@ public class App {
 
     public void displayCountry(ArrayList<Country> countries) {
         // Check employees is not null
-        if (countries == null)
-        {
+        if (countries == null) {
             System.out.println("No countries.");
             return;
         }
@@ -173,8 +179,7 @@ public class App {
         }
     }
 
-    public ArrayList<City>CitiesInRegionDesc(String region)
-    {
+    public ArrayList<City> CitiesInRegionDesc(String region) {
         try {
 
             ArrayList<City> cities = new ArrayList<City>();
@@ -186,14 +191,13 @@ public class App {
 
                     "SELECT city.Name, city.District, city.Population "
                             + "FROM city, country "
-                            + "WHERE country.Region = '" + region +"' "
+                            + "WHERE country.Region = '" + region + "' "
                             + "AND  city.CountryCode = country.Code "
                             + "ORDER BY Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
 
-            while (rset.next())
-            {
+            while (rset.next()) {
                 City city = new City();
                 city.name = rset.getString("city.Name");
                 city.district = rset.getString("city.District");
@@ -201,9 +205,7 @@ public class App {
                 cities.add(city);
             }
             return cities;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get details");
             return null;
@@ -277,6 +279,7 @@ public class App {
             System.out.println(emp_string);
         }
     }
+
     public void displayCountriesByRegion(ArrayList<Country> countries) {
         // Print header
         System.out.println(String.format("%-10s %-15s %-20s", "Name", "Region", "Population"));
@@ -300,19 +303,19 @@ public class App {
             System.out.println(emp_string);
         }
     }
-/*
-    public void displayPop(ArrayList<Population> pops){
-        System.out.println(String.format("%-15s %-20s %-15s %-20s","Continent", "Continent Pop", "City Pop", "Not City Pop"));
-        for (Population pop : pops) {
-            String emp_string =
-                    String.format("%-15s %-20s %-15s %-20s",
-                            pop.population, pop.regoionPop, pop.cityPop, pop.nonCityPop);
-            System.out.println(emp_string);
+
+    /*
+        public void displayPop(ArrayList<Population> pops){
+            System.out.println(String.format("%-15s %-20s %-15s %-20s","Continent", "Continent Pop", "City Pop", "Not City Pop"));
+            for (Population pop : pops) {
+                String emp_string =
+                        String.format("%-15s %-20s %-15s %-20s",
+                                pop.population, pop.regoionPop, pop.cityPop, pop.nonCityPop);
+                System.out.println(emp_string);
+            }
         }
-    }
-*/
-    public ArrayList<City> topNCapitalsContinent(int n)
-    {
+    */
+    public ArrayList<City> topNCapitalsContinent(int n) {
         try {
             String[] continents = new String[]{"Asia", "Europe", "North America", "Africa", "Oceania", "Antarctica", "South America"};
 
@@ -325,7 +328,7 @@ public class App {
                 String strSelect =
                         "SELECT city.Name, city.District, city.Population "
                                 + "FROM city, country "
-                                + "WHERE country.Continent = '" + cont +"' "
+                                + "WHERE country.Continent = '" + cont + "' "
                                 + "AND city.ID = country.Capital "
                                 + "ORDER BY Population DESC LIMIT " + n;
                 // Execute SQL statement
@@ -349,21 +352,18 @@ public class App {
     }
 
 
-    public ArrayList<City>topNpopulatedCitiesInContinent(int n)
-    {
-        try
-        {
+    public ArrayList<City> topNpopulatedCitiesInContinent(int n) {
+        try {
 
             String[] continents = new String[]{"Asia", "Europe", "North America", "Africa", "Oceania", "Antarctica", "South America"};
             ArrayList<City> topNpopulationCities = new ArrayList<City>();
 
-            for (String cont : continents)
-            {
+            for (String cont : continents) {
                 Statement stmt = con.createStatement();
                 String strtopNWorld =
                         "SELECT city.Name, city.District, city.Population "
                                 + "FROM city, country "
-                                + "WHERE Continent = '" + cont +"' "
+                                + "WHERE Continent = '" + cont + "' "
                                 + "AND city.CountryCode = country.Code "
                                 + "ORDER BY Population DESC LIMIT " + n;
 
@@ -372,15 +372,13 @@ public class App {
                 while (rset.next()) {
                     City city = new City();
                     city.name = rset.getString("Name");
-                    city.district=rset.getString("District");
+                    city.district = rset.getString("District");
                     city.population = rset.getInt("Population");
                     topNpopulationCities.add(city);
                 }
             }
             return topNpopulationCities;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get details");
             return null;
@@ -413,7 +411,7 @@ public class App {
     }
 
 
-    public ArrayList<City>topnNCitiesContinent(int n) {
+    public ArrayList<City> topnNCitiesContinent(int n) {
         try {
             String[] continents = new String[]{"Asia", "Europe", "North America", "Africa", "Oceania", "Antarctica", "South America"};
             ArrayList<City> topNpopulationCities = new ArrayList<City>();
@@ -439,6 +437,38 @@ public class App {
             }
             return topNpopulationCities;
         } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+    //All the cities in a continent organised by largest population to smallest
+    public ArrayList<City> CitiesInContinent(String cont) {
+        try {
+        ArrayList<City> cities = new ArrayList<>();
+
+            Statement stmt = con.createStatement();
+            String strCitiesInCont =
+                    "SELECT city.Name, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE Continent = '" + cont + "' "
+                            + "AND city.CountryCode = country.Code "
+                            + "ORDER BY Population DESC";
+
+            ResultSet rset = stmt.executeQuery(strCitiesInCont);
+
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+
+            return cities;
+        } catch (
+                Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get details");
             return null;
