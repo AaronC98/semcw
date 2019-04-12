@@ -74,7 +74,13 @@ public class App {
         String district = "Kabol";
         System.out.println("\nAll cities in a district organised by largest population to smallest:");
         ArrayList<City> CitiestInDistrict = a.CitiesInDistrict(district);
-        a.displayCities((CitiestInDistrict));
+        a.displayCities(CitiestInDistrict);
+
+        //All Cities in a Region Largest population to smallest
+        region = "Caribbean";
+        System.out.println("\nAll cities in a region organised by largest population to smallest");
+        ArrayList<City> CitiesInRegion = a.CitiesInRegion(region);
+        a.displayCities(CitiesInRegion);
 
 
 //        //TO-DO
@@ -495,6 +501,38 @@ public class App {
                             + "ORDER BY Population DESC";
 
             ResultSet rset = stmt.executeQuery(strCitiesInDistrict);
+
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+
+            return cities;
+        } catch (
+                Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+    //All the countries in a region organised by largest population to smallest
+    public ArrayList<City> CitiesInRegion(String region) {
+        try {
+            ArrayList<City> cities = new ArrayList<>();
+
+            Statement stmt = con.createStatement();
+            String strCitiesInRegion =
+                    "SELECT city.Name, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE country.Region = '" + region + "' "
+                            + "AND city.CountryCode = country.Code "
+                            + "ORDER BY Population DESC";
+
+            ResultSet rset = stmt.executeQuery(strCitiesInRegion);
 
             while (rset.next()) {
                 City city = new City();
