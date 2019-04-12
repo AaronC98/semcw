@@ -89,6 +89,14 @@ public class App {
         ArrayList<City> TopNCitiesInCountry = a.TopNCitiesInCountry(country, n);
         a.displayCities(TopNCitiesInCountry);
 
+        //The top N populated cities in a region
+        n = 5;
+        region = "";
+        System.out.println("\nTop " + n + "cities in a region");
+        ArrayList<City> TopNCitiesInRegion = a.TopNCitiesInRegion(region, n);
+        a.displayCities(TopNCitiesInRegion);
+
+
 
 //        //TO-DO
 //        //Listing the population of people, people in cities, and people not living in cities in each continent
@@ -589,4 +597,38 @@ public class App {
             return null;
         }
     }
+
+    //The top N populated capital cities in a region
+    public ArrayList<City> TopNCitiesInRegion(String region, int n) {
+        try {
+            ArrayList<City> cities = new ArrayList<>();
+
+            Statement stmt = con.createStatement();
+            String strTopNCitiesInRegion =
+                    "SELECT city.Name, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE country.Region = '" + region + "' "
+                            + "AND city.CountryCode = country.Code "
+                            + "ORDER BY Population DESC LIMIT " + n;
+
+            ResultSet rset = stmt.executeQuery(strTopNCitiesInRegion);
+
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+
+            return cities;
+        } catch (
+                Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+
 }
