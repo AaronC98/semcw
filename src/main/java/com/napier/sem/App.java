@@ -104,6 +104,12 @@ public class App {
         ArrayList<Country> CountriesContinentDesc = a.CountriesContinentDesc();
         a.displayCountry(CountriesContinentDesc);
 
+        //Listing all the countries in a continent descending order.
+        System.out.println("Listing all the countries in a continent : ");
+        ArrayList<City> CapitalsWorldDesc = a.CapitalsWorldDesc(n);
+        a.displayCities(CapitalsWorldDesc);
+
+
 
 
 //        //TO-DO
@@ -637,6 +643,8 @@ public class App {
             return null;
         }
     }
+
+    // Andreas
     public ArrayList<Country> CountriesContinentDesc(String continents) {
         try {
 
@@ -669,6 +677,34 @@ public class App {
             return null;
         }
     }
+
+    // Andreas
+    public ArrayList<City> CapitalsWorldDesc(int n) {
+        try {
+            Statement stmt = con.createStatement();
+            String strtopNWorld =
+                    "SELECT Name, District,Population "
+                            + "FROM city, country "
+                            + "WHERE city.ID = country.Capital "
+                            + "ORDER BY Population DESC ";
+
+            ResultSet rset = stmt.executeQuery(strtopNWorld);
+            ArrayList<City> CapitalsWorldDesc = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                CapitalsWorldDesc.add(city);
+            }
+            return CapitalsWorldDesc;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
 
 
 
