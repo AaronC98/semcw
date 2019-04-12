@@ -736,6 +736,33 @@ public class App {
         }
     }
 
+    public ArrayList<City> TopCitiesDistrict(int n) {
+        try {
+            Statement stmt = con.createStatement();
+            String strtopNWorld =
+                    "SELECT Name, District,Population "
+                            + "FROM city, country "
+                            + "WHERE country.district = '"+ district +"' "
+                            + "ORDER BY Population DESC LIMIT " + n;
+
+            ResultSet rset = stmt.executeQuery(strtopNWorld);
+            ArrayList<City> CapitalsWorldDesc = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                CapitalsWorldDesc.add(city);
+            }
+            return CapitalsWorldDesc;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+
 
 
 }
