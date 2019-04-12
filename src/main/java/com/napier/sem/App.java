@@ -64,7 +64,6 @@ public class App {
         ArrayList<City> topNCitiesContinent = a.topnNCitiesContinent(n);
         a.displayCities(topNCitiesContinent);
 
-
 //        //TO-DO
 //        //Listing the population of people, people in cities, and people not living in cities in each continent
 //        System.out.println("\nListing the population of people, people in cities, and people not living in cities in each continent.");
