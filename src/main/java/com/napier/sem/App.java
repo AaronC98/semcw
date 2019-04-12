@@ -89,6 +89,11 @@ public class App {
         ArrayList<City> TopNCitiesInCountry = a.TopNCitiesInCountry(country, n);
         a.displayCities(TopNCitiesInCountry);
 
+        //Listing all the capitals in the world in descending order.
+        System.out.println("All the capitals in the World: ");
+        ArrayList<Country> countries = a.populationWorldDesc();
+        a.displayCountry(countries);
+
 
 //        //TO-DO
 //        //Listing the population of people, people in cities, and people not living in cities in each continent
@@ -589,4 +594,34 @@ public class App {
             return null;
         }
     }
+    // Andreas
+    public ArrayList<City> CapitalsWorldDesc(int n) {
+        try {
+            Statement stmt = con.createStatement();
+            String strtopNWorld =
+                    "SELECT Name, District,Population "
+                            + "FROM city, country "
+                            + "WHERE city.ID = country.Capital "
+                            + "ORDER BY Population DESC ";
+
+            ResultSet rset = stmt.executeQuery(strtopNWorld);
+            ArrayList<City> CapitalsWorldDesc = new ArrayList<City>();
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                CapitalsWorldDesc.add(city);
+            }
+            return CapitalsWorldDesc;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+
 }
+
+
