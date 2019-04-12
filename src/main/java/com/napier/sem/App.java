@@ -82,6 +82,13 @@ public class App {
         ArrayList<City> CitiesInRegion = a.CitiesInRegion(region);
         a.displayCities(CitiesInRegion);
 
+        //The top N populated cities in a country
+        n = 5;
+        String country = "Canada";
+        System.out.println("\nTop " + n + " cities in a country");
+        ArrayList<City> TopNCitiesInCountry = a.TopNCitiesInCountry(country, n);
+        a.displayCities(TopNCitiesInCountry);
+
 
 //        //TO-DO
 //        //Listing the population of people, people in cities, and people not living in cities in each continent
@@ -533,6 +540,38 @@ public class App {
                             + "ORDER BY Population DESC";
 
             ResultSet rset = stmt.executeQuery(strCitiesInRegion);
+
+            while (rset.next()) {
+                City city = new City();
+                city.name = rset.getString("Name");
+                city.district = rset.getString("District");
+                city.population = rset.getInt("Population");
+                cities.add(city);
+            }
+
+            return cities;
+        } catch (
+                Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
+
+    //The top N populated cities in a country
+    public ArrayList<City> TopNCitiesInCountry(String country, int n) {
+        try {
+            ArrayList<City> cities = new ArrayList<>();
+
+            Statement stmt = con.createStatement();
+            String strTopNCitiesInCountry =
+                    "SELECT city.Name, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE country = '" + country + "' "
+                            + "AND city.CountryCode = country.Code "
+                            + "ORDER BY Population DESC LIMIT " + n;
+
+            ResultSet rset = stmt.executeQuery(strTopNCitiesInCountry);
 
             while (rset.next()) {
                 City city = new City();
