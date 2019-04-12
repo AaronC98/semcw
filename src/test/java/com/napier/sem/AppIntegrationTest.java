@@ -73,7 +73,6 @@ public class AppIntegrationTest
         assertEquals(a, b);
     }
 
-
     @Test
     void topNCitiesContinent() {
         ArrayList<City> city = app.topnNCitiesContinent(5);
@@ -83,13 +82,11 @@ public class AppIntegrationTest
     }
 
     @Test
-    void TopNpopulatedCities() {
+    void topNCitiesWorld() {
         ArrayList<City> city = app.topNCitiesWorld(4);
         String a = "Mumbai (Bombay)";
         String b = city.get(0).name;
         assertEquals(a, b);
     }
-
-
 
     }

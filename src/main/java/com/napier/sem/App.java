@@ -23,7 +23,6 @@ public class App {
             a.connect(args[0]);
         }
 
-/*
         //Listing all countries in the world in descending order.
         System.out.println("All Countries in the World: ");
         ArrayList<Country> countries = a.populationWorldDesc();
@@ -48,30 +47,30 @@ public class App {
         a.displayCountries(topNCountriesInWorld);
 
         //Listing top N capitals per continent.
-        int n = 5;
+        n = 5;
         System.out.println("\nTop " + n + " capitals per continent:");
         ArrayList<City> topNCapitalsContinent = a.topNCapitalsContinent(n);
         a.displayCities(topNCapitalsContinent);
-        */
+
         //Listing top N populated cities in the world.
-        int n = 5;
+        n = 10;
         System.out.println("\nTop " + n + " cities in the world:");
         ArrayList<City> topNCitiesWorld = a.topNCitiesWorld(n);
         a.displayCities(topNCitiesWorld);
-/*
-        //TO-DO
+
         //Listing top N cities per continent.
-        int n = 5;
+        n = 5;
         System.out.println("\nTop " + n + " cities per continent:");
         ArrayList<City> topNCitiesContinent = a.topnNCitiesContinent(n);
         a.displayCities(topNCitiesContinent);
 
-        //TO-DO
-        //Listing the population of people, people in cities, and people not living in cities in each continent
-        System.out.println("\nListing the population of people, people in cities, and people not living in cities in each continent.");
-        ArrayList<Population> populationReportRegion = a.populationReportRegion();
-        a.displayPopulation(populationReportRegion);
-*/
+
+//        //TO-DO
+//        //Listing the population of people, people in cities, and people not living in cities in each continent
+//        System.out.println("\nListing the population of people, people in cities, and people not living in cities in each continent.");
+//        ArrayList<Population> populationReportRegion = a.populationReportRegion();
+//        a.displayPopulation(populationReportRegion);
+
         // Disconnect from database
         a.disconnect();
     }
@@ -416,21 +415,17 @@ public class App {
     }
 
 
-    public ArrayList<City>topnNCitiesContinent(int n)
-    {
-        try
-        {
-
+    public ArrayList<City>topnNCitiesContinent(int n) {
+        try {
             String[] continents = new String[]{"Asia", "Europe", "North America", "Africa", "Oceania", "Antarctica", "South America"};
             ArrayList<City> topNpopulationCities = new ArrayList<City>();
 
-            for (String cont : continents)
-            {
+            for (String cont : continents) {
                 Statement stmt = con.createStatement();
                 String strtopNWorld =
                         "SELECT city.Name, city.District, city.Population "
                                 + "FROM city, country "
-                                + "WHERE Continent = '" + cont +"' "
+                                + "WHERE Continent = '" + cont + "' "
                                 + "AND city.CountryCode = country.Code "
                                 + "ORDER BY Population DESC LIMIT " + n;
 
@@ -439,19 +434,16 @@ public class App {
                 while (rset.next()) {
                     City city = new City();
                     city.name = rset.getString("Name");
-                    city.district=rset.getString("District");
+                    city.district = rset.getString("District");
                     city.population = rset.getInt("Population");
                     topNpopulationCities.add(city);
                 }
             }
             return topNpopulationCities;
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get details");
             return null;
         }
     }
-
 }

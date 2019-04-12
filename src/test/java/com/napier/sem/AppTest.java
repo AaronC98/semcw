@@ -58,11 +58,6 @@ public class AppTest
        country.Population = 103000;
        countries.add(country1);
 
-       country2.Name = "Malta";
-       country2.Continent = "Europe";
-       country2.Population = 380200;
-       countries.add(country2);
-
        app.displayCountriesByRegion(countries);
    }
 
