@@ -25,35 +25,35 @@ public class App {
 
         int n;
         String region;
-//
-//        //Listing all countries in the world in descending order.
-//        System.out.println("All Countries in the World: ");
-//        ArrayList<Country> countries = a.populationWorldDesc();
-//        a.displayCountry(countries);
-//
-//        //Listing all the countries in a continent descending order.
-//        String continents = "Europe";
-//        System.out.println("All the countries in a continent: ");
-//        ArrayList<Country> CountriesContinentDesc = a.CountriesContinentDesc(continents);
-//        a.displayCountry(CountriesContinentDesc);
-//
-//        //Listing all countries in a region in descending order.
-//        region = "Nordic Countries";
-//        System.out.println("\nAll Countries in" + region + ": ");
-//        ArrayList<Country> AllCountriesInRegion = a.AllCountriesInRegion(region);
-//        a.displayCountriesByRegion(AllCountriesInRegion);
-//
-//        //Listing all cities in a region.
-//        region = "Nordic Countries";
-//        System.out.println("\nAll cities in " + region);
-//        ArrayList<City> citiesInRegion = a.CitiesInRegionDesc(region);
-//        a.displayCities(citiesInRegion);
-//
-//        //Listing top N countries in the world
-//        n = 5;
-//        System.out.println("\nTop " + n + " countries in the world.");
-//        ArrayList<Country> topNCountriesInWorld = a.topNWorld(n);
-//        a.displayCountries(topNCountriesInWorld);
+
+        //Listing all countries in the world in descending order.
+        System.out.println("All Countries in the World: ");
+        ArrayList<Country> countries = a.populationWorldDesc();
+        a.displayCountry(countries);
+
+        //Listing all the countries in a continent descending order.
+        String continents = "Europe";
+        System.out.println("All the countries in a continent: ");
+        ArrayList<Country> CountriesContinentDesc = a.CountriesContinentDesc(continents);
+        a.displayCountry(CountriesContinentDesc);
+
+        //Listing all countries in a region in descending order.
+        region = "Nordic Countries";
+        System.out.println("\nAll Countries in" + region + ": ");
+        ArrayList<Country> AllCountriesInRegion = a.AllCountriesInRegion(region);
+        a.displayCountriesByRegion(AllCountriesInRegion);
+
+        //Listing all cities in a region.
+        region = "Nordic Countries";
+        System.out.println("\nAll cities in " + region);
+        ArrayList<City> citiesInRegion = a.CitiesInRegionDesc(region);
+        a.displayCities(citiesInRegion);
+
+        //Listing top N countries in the world
+        n = 5;
+        System.out.println("\nTop " + n + " countries in the world.");
+        ArrayList<Country> topNCountriesInWorld = a.topNWorld(n);
+        a.displayCountries(topNCountriesInWorld);
 
         //Listing top N countries per continent
         n = 3;
@@ -147,6 +147,8 @@ public class App {
 //        System.out.println("\nListing the population of people, people in cities, and people not living in cities in each continent.");
 //        ArrayList<Population> populationReportRegion = a.populationReportRegion();
 //        a.displayPopulation(populationReportRegion);
+
+
 
         // Disconnect from database
         a.disconnect();
