@@ -15,6 +15,6 @@
 
 | ID  | Name  | Met  |  Screenshot |
 |-----|-------|------|-------------|
-|1     |    All the countries in the world organised by largest population to smallest.   |   Yes   |    <img src="/Users/aaroncampbell/Desktop/Screenshot1.png" />    |
+|1     |    All the countries in the world organised by largest population to smallest.   |   Yes   |    ![GitHub Logo](/Users/aaroncampbell/Desktop/Screenshot1.png) <img src="/Users/aaroncampbell/Desktop/Screenshot1.png" />    |
 |     |       |      |             |
 |     |       |      |             |
