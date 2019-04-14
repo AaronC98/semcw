@@ -25,37 +25,41 @@ public class App {
 
         int n;
         String region;
+//
+//        //Listing all countries in the world in descending order.
+//        System.out.println("All Countries in the World: ");
+//        ArrayList<Country> countries = a.populationWorldDesc();
+//        a.displayCountry(countries);
+//
+//        //Listing all the countries in a continent descending order.
+//        String continents = "Europe";
+//        System.out.println("All the countries in a continent: ");
+//        ArrayList<Country> CountriesContinentDesc = a.CountriesContinentDesc(continents);
+//        a.displayCountry(CountriesContinentDesc);
+//
+//        //Listing all countries in a region in descending order.
+//        region = "Nordic Countries";
+//        System.out.println("\nAll Countries in" + region + ": ");
+//        ArrayList<Country> AllCountriesInRegion = a.AllCountriesInRegion(region);
+//        a.displayCountriesByRegion(AllCountriesInRegion);
+//
+//        //Listing all cities in a region.
+//        region = "Nordic Countries";
+//        System.out.println("\nAll cities in " + region);
+//        ArrayList<City> citiesInRegion = a.CitiesInRegionDesc(region);
+//        a.displayCities(citiesInRegion);
+//
+//        //Listing top N countries in the world
+//        n = 5;
+//        System.out.println("\nTop " + n + " countries in the world.");
+//        ArrayList<Country> topNCountriesInWorld = a.topNWorld(n);
+//        a.displayCountries(topNCountriesInWorld);
 
-        //Listing all countries in the world in descending order.
-        System.out.println("All Countries in the World: ");
-        ArrayList<Country> countries = a.populationWorldDesc();
-        a.displayCountry(countries);
-
-        //Listing all the countries in a continent descending order.
-        String continents = "Europe";
-        System.out.println("All the countries in a continent: ");
-        ArrayList<Country> CountriesContinentDesc = a.CountriesContinentDesc(continents);
-        a.displayCountry(CountriesContinentDesc);
-
-        //Listing all countries in a region in descending order.
-        region = "Nordic Countries";
-        System.out.println("\nAll Countries in" + region + ": ");
-        ArrayList<Country> AllCountriesInRegion = a.AllCountriesInRegion(region);
-        a.displayCountriesByRegion(AllCountriesInRegion);
-
-        //Listing all cities in a region.
-        region = "Nordic Countries";
-        System.out.println("\nAll cities in " + region);
-        ArrayList<City> citiesInRegion = a.CitiesInRegionDesc(region);
-        a.displayCities(citiesInRegion);
-
-        //Listing top N countries in the world
-        n = 5;
-        System.out.println("\nTop " + n + " countries in the world.");
-        ArrayList<Country> topNCountriesInWorld = a.topNWorld(n);
-        a.displayCountries(topNCountriesInWorld);
-
-        //Top n countries in a continent. No one.
+        //Listing top N countries per continent
+        n = 3;
+        System.out.println("\nTOP " + n + " countries per continent:");
+        ArrayList<Country> topNContinent = a.topNCountriesContinent(n);
+        a.displayCountries(topNContinent);
 
         //Top n countries in a region. Sam.
 
@@ -344,7 +348,6 @@ public class App {
     }
 
 
-
     public ArrayList<Country> topNWorld(int n) {
         try {
             Statement stmt = con.createStatement();
@@ -370,7 +373,40 @@ public class App {
         }
     }
 
-    //Top n countries in a continent. No one.
+    public ArrayList<Country> topNCountriesContinent(int n) {
+        try {
+            String[] continents = new String[]{"Asia", "Europe", "North America", "Africa", "Oceania", "Antarctica", "South America"};
+
+            ArrayList<Country> countries = new ArrayList<Country>();
+
+            for (String cont : continents) {
+                // Create an SQL statement
+                Statement stmt = con.createStatement();
+                // Create string for SQL statement
+                String strSelect =
+                        "SELECT Name, Continent, Population "
+                                + "FROM country "
+                                + "WHERE Continent = '" + cont + "' "
+                                + "ORDER BY Population DESC LIMIT " + n;
+                // Execute SQL statement
+                ResultSet rset = stmt.executeQuery(strSelect);
+                // Extract employee information
+
+                while (rset.next()) {
+                    Country country = new Country();
+                    country.Name = rset.getString("Name");
+                    country.Continent = rset.getString("Continent");
+                    country.Population = rset.getInt("Population");
+                    countries.add(country);
+                }
+            }
+            return countries;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get details");
+            return null;
+        }
+    }
 
     //Top n countries in a region. Sam.
 
