@@ -632,7 +632,7 @@ public class App {
         try {
             Statement stmt = con.createStatement();
             String strtopNWorld =
-                    "SELECT Name, District,Population "
+                    "SELECT city.Name, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE city.ID = country.Capital "
                             + "ORDER BY Population DESC ";
@@ -718,7 +718,7 @@ public class App {
         }
     }
 
-    
+
 
 
 
