@@ -13,6 +13,8 @@
 
 # Requirements
 
+22 requirements of 32 have been implemented, which is 68.75%%.
+
 
 
 | ID  | Name  | Met  |  Screenshot |
