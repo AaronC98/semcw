@@ -42,12 +42,12 @@
 |23     |    The population of people, people living in cities, and people not living in cities in each continent.  |   No   |    |
 |24     |    The population of people, people living in cities, and people not living in cities in each region.  |   No   |    |
 |25     |    The population of people, people living in cities, and people not living in cities in each country. |  No   |    |
-|26     |  The population of the world.   |   No   |      ![ScreenShot26](/screenshots/Screenshot26.png)         |
-|27     |  The population of a continent.    |   No   |     -        |
-|28     |   The population of a region.     |   No   |      -       |
-|29     |   The population of a country.      |   No   |    -         |
-|30     |   The population of a district.     |   No   |    -         |
-|31     |  The population of a city.     |   No   |      -       |
+|26     |  The population of the world.   |   Yes   |      ![ScreenShot26](/screenshots/Screenshot26.png)         |
+|27     |  The population of a continent.    |   Yes   |     -        |
+|28     |   The population of a region.     |   Yes   |      -       |
+|29     |   The population of a country.      |   Yes   |    -         |
+|30     |   The population of a district.     |   Yes   |    -         |
+|31     |  The population of a city.     |   Yes   |      -       |
 |32     |  Languages report.   |   No   |             |
 
 
