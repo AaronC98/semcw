@@ -26,16 +26,16 @@ public class App {
         int n;
         String region;
 
-        //Listing all countries in the world in descending order.
-        System.out.println("All Countries in the World: ");
-        ArrayList<Country> countries = a.populationWorldDesc();
-        a.displayCountries(countries);
-
-        //Listing all the countries in a continent descending order.
-        String continents = "Europe";
-        System.out.println("All the countries in a continent: ");
-        ArrayList<Country> CountriesContinentDesc = a.CountriesContinentDesc(continents);
-        a.displayCountries(CountriesContinentDesc);
+//        //Listing all countries in the world in descending order.
+//        System.out.println("All Countries in the World: ");
+//        ArrayList<Country> countries = a.populationWorldDesc();
+//        a.displayCountries(countries);
+//
+//        //Listing all the countries in a continent descending order.
+//        String continents = "Europe";
+//        System.out.println("All the countries in a continent: ");
+//        ArrayList<Country> CountriesContinentDesc = a.CountriesContinentDesc(continents);
+//        a.displayCountries(CountriesContinentDesc);
 
         //Listing all countries in a region in descending order.
         region = "Nordic Countries";
@@ -48,91 +48,91 @@ public class App {
         System.out.println("\nAll cities in " + region);
         ArrayList<City> citiesInRegion = a.CitiesInRegionDesc(region);
         a.displayCities(citiesInRegion);
-
-        //Listing top N countries in the world
-        n = 5;
-        System.out.println("\nTop " + n + " countries in the world.");
-        ArrayList<Country> topNCountriesInWorld = a.topNWorld(n);
-        a.displayCountries(topNCountriesInWorld);
-
-        //Listing top N countries per continent
-        n = 3;
-        System.out.println("\nTOP " + n + " countries per continent:");
-        ArrayList<Country> topNContinent = a.topNCountriesContinent(n);
-        a.displayCountries(topNContinent);
-
-        //Top n countries in a region. Sam.
-
-        //Cities in the world desc. Sam.
-
-        //All Cities in a Continent largest population to smallest
-        String cont = "Asia";
-        System.out.println("\nAll cities in a continent organised by largest population to smallest:");
-        ArrayList<City> CitiesInContinent = a.CitiesInContinent(cont);
-        a.displayCities(CitiesInContinent);
-
-        //All Cities in a Region Largest population to smallest
-        region = "Caribbean";
-        System.out.println("\nAll cities in a region organised by largest population to smallest");
-        ArrayList<City> CitiesInRegion = a.CitiesInRegion(region);
-        a.displayCities(CitiesInRegion);
-
-        //Cities in a country desc. Sam.
-
-        //All Cities in a District largest population to smallest
-        String district = "Kabol";
-        System.out.println("\nAll cities in a district organised by largest population to smallest:");
-        ArrayList<City> CitiestInDistrict = a.CitiesInDistrict(district);
-        a.displayCities(CitiestInDistrict);
-
-        //Listing top N populated cities in the world.
-        n = 10;
-        System.out.println("\nTop " + n + " cities in the world:");
-        ArrayList<City> topNCitiesWorld = a.topNCitiesWorld(n);
-        a.displayCities(topNCitiesWorld);
-
-        //Listing top N cities per continent.
-        n = 5;
-        System.out.println("\nTop " + n + " cities per continent:");
-        ArrayList<City> topNCitiesContinent = a.topnNCitiesContinent(n);
-        a.displayCities(topNCitiesContinent);
-
-        //The top N populated cities in a region
-        n = 5;
-        region = "Caribbean";
-        System.out.println("\nTop " + n + "cities in a region");
-        ArrayList<City> TopNCitiesInRegion = a.TopNCitiesInRegion(region, n);
-        a.displayCities(TopNCitiesInRegion);
-
-        //The top N populated cities in a country
-        n = 5;
-        String country = "Canada";
-        System.out.println("\nTop " + n + " cities in a country");
-        ArrayList<City> TopNCitiesInCountry = a.TopNCitiesInCountry(country, n);
-        a.displayCities(TopNCitiesInCountry);
-
-        //Top N populated cities in a district. Andreas.
-
-        //Listing all the capital cities in the world in descending order.
-        System.out.println("Listing all the countries in a continent : ");
-        ArrayList<City> CapitalsWorldDesc = a.CapitalsWorldDesc(n);
-        a.displayCities(CapitalsWorldDesc);
-
-        //All capitals in a continent. Andreas.
-
-        //All capitals in a region. Fletcher.
-
-        //Top N capitals in the world.
-        n = 5;
-        System.out.println("\nTop " + n + " capital cities in the world:");
-        ArrayList<City> topNCapitalsWorld = a.topNCapitalsWorld(n);
-        a.displayCities(topNCapitalsWorld);
-
-        //Listing top N capitals per continent.
-        n = 10;
-        System.out.println("\nTop " + n + " capitals per continent:");
-        ArrayList<City> topNCapitalsContinent = a.topNCapitalsContinent(n);
-        a.displayCities(topNCapitalsContinent);
+//
+//        //Listing top N countries in the world
+//        n = 5;
+//        System.out.println("\nTop " + n + " countries in the world.");
+//        ArrayList<Country> topNCountriesInWorld = a.topNWorld(n);
+//        a.displayCountries(topNCountriesInWorld);
+//
+//        //Listing top N countries per continent
+//        n = 3;
+//        System.out.println("\nTOP " + n + " countries per continent:");
+//        ArrayList<Country> topNContinent = a.topNCountriesContinent(n);
+//        a.displayCountries(topNContinent);
+//
+//        //Top n countries in a region. Sam.
+//
+//        //Cities in the world desc. Sam.
+//
+//        //All Cities in a Continent largest population to smallest
+//        String cont = "Asia";
+//        System.out.println("\nAll cities in a continent organised by largest population to smallest:");
+//        ArrayList<City> CitiesInContinent = a.CitiesInContinent(cont);
+//        a.displayCities(CitiesInContinent);
+//
+//        //All Cities in a Region Largest population to smallest
+//        region = "Caribbean";
+//        System.out.println("\nAll cities in a region organised by largest population to smallest");
+//        ArrayList<City> CitiesInRegion = a.CitiesInRegion(region);
+//        a.displayCities(CitiesInRegion);
+//
+//        //Cities in a country desc. Sam.
+//
+//        //All Cities in a District largest population to smallest
+//        String district = "Kabol";
+//        System.out.println("\nAll cities in a district organised by largest population to smallest:");
+//        ArrayList<City> CitiestInDistrict = a.CitiesInDistrict(district);
+//        a.displayCities(CitiestInDistrict);
+//
+//        //Listing top N populated cities in the world.
+//        n = 10;
+//        System.out.println("\nTop " + n + " cities in the world:");
+//        ArrayList<City> topNCitiesWorld = a.topNCitiesWorld(n);
+//        a.displayCities(topNCitiesWorld);
+//
+//        //Listing top N cities per continent.
+//        n = 5;
+//        System.out.println("\nTop " + n + " cities per continent:");
+//        ArrayList<City> topNCitiesContinent = a.topnNCitiesContinent(n);
+//        a.displayCities(topNCitiesContinent);
+//
+//        //The top N populated cities in a region
+//        n = 5;
+//        region = "Caribbean";
+//        System.out.println("\nTop " + n + "cities in a region");
+//        ArrayList<City> TopNCitiesInRegion = a.TopNCitiesInRegion(region, n);
+//        a.displayCities(TopNCitiesInRegion);
+//
+//        //The top N populated cities in a country
+//        n = 5;
+//        String country = "Canada";
+//        System.out.println("\nTop " + n + " cities in a country");
+//        ArrayList<City> TopNCitiesInCountry = a.TopNCitiesInCountry(country, n);
+//        a.displayCities(TopNCitiesInCountry);
+//
+//        //Top N populated cities in a district. Andreas.
+//
+//        //Listing all the capital cities in the world in descending order.
+//        System.out.println("Listing all the countries in a continent : ");
+//        ArrayList<City> CapitalsWorldDesc = a.CapitalsWorldDesc(n);
+//        a.displayCities(CapitalsWorldDesc);
+//
+//        //All capitals in a continent. Andreas.
+//
+//        //All capitals in a region. Fletcher.
+//
+//        //Top N capitals in the world.
+//        n = 5;
+//        System.out.println("\nTop " + n + " capital cities in the world:");
+//        ArrayList<City> topNCapitalsWorld = a.topNCapitalsWorld(n);
+//        a.displayCities(topNCapitalsWorld);
+//
+//        //Listing top N capitals per continent.
+//        n = 10;
+//        System.out.println("\nTop " + n + " capitals per continent:");
+//        ArrayList<City> topNCapitalsContinent = a.topNCapitalsContinent(n);
+//        a.displayCities(topNCapitalsContinent);
 
         //Top N capitals in region. Fletcher.
 
@@ -245,7 +245,7 @@ public class App {
             // Create string for SQL statement
             String strSelect =
 
-                    "SELECT Name, Continent, Population "
+                    "SELECT Name, Continent, Population,  Continent, Region, Population, Capital "
                             + "FROM country "
                             + "WHERE Continent = '" + continents + "' "
                             + "ORDER BY Population DESC ";
@@ -255,9 +255,12 @@ public class App {
 
             while (rset.next()) {
                 Country country = new Country();
+                country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
                 country.Continent = rset.getString("Continent");
+                country.region = rset.getString("Region");
                 country.Population = rset.getInt("Population");
+                country.Capital = rset.getInt("Capital");
                 countries.add(country);
             }
             return countries;
@@ -277,7 +280,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, Region, Population "
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
                             + "FROM country "
                             + "WHERE Region = '" + region + "' "
                             + "ORDER BY Population DESC ";
@@ -286,9 +289,12 @@ public class App {
 
             while (rset.next()) {
                 Country country = new Country();
+                country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
                 country.region = rset.getString("Region");
                 country.Population = rset.getInt("Population");
+                country.Capital = rset.getInt("Capital");
                 countries.add(country);
             }
             return countries;
@@ -309,7 +315,7 @@ public class App {
             // Create string for SQL statement
             String strSelect =
 
-                    "SELECT city.Name, city.District, city.Population "
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city, country "
                             + "WHERE country.Region = '" + region + "' "
                             + "AND  city.CountryCode = country.Code "
@@ -320,6 +326,7 @@ public class App {
             while (rset.next()) {
                 City city = new City();
                 city.name = rset.getString("city.Name");
+                city.CountryCode = rset.getString("city.CountryCode");
                 city.district = rset.getString("city.District");
                 city.population = rset.getInt("city.Population");
                 cities.add(city);
@@ -767,12 +774,12 @@ public class App {
 
     public void displayCountriesByRegion(ArrayList<Country> countries) {
         // Print header
-        System.out.println(String.format("%-10s %-15s %-20s", "Name", "Region", "Population"));
+        System.out.println(String.format("%-3s %-10s %-15s &-15s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
         // Loop over all employees in the list
         for (Country country : countries) {
             String emp_string =
                     String.format("%-10s %-15s %-20s",
-                            country.Name, country.region, country.Population);
+                            country.Code, country.Name, country.Continent, country.region, country.Population, country.Capital);
             System.out.println(emp_string);
         }
     }
