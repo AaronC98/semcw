@@ -13,6 +13,8 @@
 
 # Requirements
 
+
+
 | ID  | Name  | Met  |  Screenshot |
 |-----|-------|------|-------------|
 |1     |    All the countries in the world organised by largest population to smallest.   |   Yes   |   ![ScreenShot1](/screenshots/Screenshot1.png)    |
@@ -36,16 +38,16 @@
 |19     |   All the capital cities in a region organised by largest to smallest.    |   No   |             |
 |20     |   The top N populated capital cities in the world where N is provided by the user.    |   Yes   |      ![ScreenShot20](/screenshots/Screenshot20.png)        |
 |21    |    The top N populated capital cities in a continent where N is provided by the user.   |   Yes   |   ![ScreenShot20](/screenshots/Screenshot20.png)   |
-|22     |    The top N populated capital cities in a region where N is provided by the user.  |   Np   |       |
+|22     |    The top N populated capital cities in a region where N is provided by the user.  |   No   |       |
 |23     |    The population of people, people living in cities, and people not living in cities in each continent.  |   No   |    |
 |24     |    The population of people, people living in cities, and people not living in cities in each region.  |   No   |    |
 |25     |    The population of people, people living in cities, and people not living in cities in each country. |  No   |    |
-|26     |  The population of the world.   |   No   |             |
-|27     |  The population of a continent.    |   No   |             |
-|28     |   The population of a region.     |   No   |             |
-|29     |   The population of a country.      |   No   |             |
-|30     |   The population of a district.     |   No   |             |
-|31     |  The population of a city.     |   No   |             |
+|26     |  The population of the world.   |   No   |      ![ScreenShot26](/screenshots/Screenshot26.png)         |
+|27     |  The population of a continent.    |   No   |     As Above        |
+|28     |   The population of a region.     |   No   |      As Above       |
+|29     |   The population of a country.      |   No   |    As Above         |
+|30     |   The population of a district.     |   No   |    As Above         |
+|31     |  The population of a city.     |   No   |      As Above       |
 |32     |  Languages report.   |   No   |             |
 
 
