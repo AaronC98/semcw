@@ -29,13 +29,13 @@ public class App {
         //Listing all countries in the world in descending order.
         System.out.println("All Countries in the World: ");
         ArrayList<Country> countries = a.populationWorldDesc();
-        a.displayCountry(countries);
+        a.displayCountries(countries);
 
         //Listing all the countries in a continent descending order.
         String continents = "Europe";
         System.out.println("All the countries in a continent: ");
         ArrayList<Country> CountriesContinentDesc = a.CountriesContinentDesc(continents);
-        a.displayCountry(CountriesContinentDesc);
+        a.displayCountries(CountriesContinentDesc);
 
         //Listing all countries in a region in descending order.
         region = "Nordic Countries";
@@ -210,7 +210,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, Population "
+                    "SELECT Code, Name, Continent, Region, Population, Capital "
                             + "FROM country "
                             + "ORDER BY Population DESC";
             // Execute SQL statement
@@ -218,10 +218,13 @@ public class App {
             // Extract employee information
             ArrayList<Country> countries = new ArrayList<Country>();
             while (rset.next()) {
-
                 Country country = new Country();
+                country.Code = rset.getString("Code");
                 country.Name = rset.getString("Name");
+                country.Continent = rset.getString("Continent");
+                country.region = rset.getString("Region");
                 country.Population = rset.getInt("Population");
+                country.Capital = rset.getInt("Capital");
                 countries.add(country);
             }
             return countries;
@@ -293,26 +296,6 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get details");
             return null;
-        }
-    }
-
-    public void displayCountry(ArrayList<Country> countries) {
-        // Check employees is not null
-        if (countries == null) {
-            System.out.println("No countries.");
-            return;
-        }
-        // Print header
-        System.out.println(String.format("%-10s %-20s", "Name", "Population"));
-        // Loop over all employees in the list
-        for (Country country : countries) {
-            if (country == null)
-                continue;
-            String ctry_string =
-                    String.format("%-10s %-20s",
-                            country.Name, country.Population);
-            System.out.println(ctry_string);
-
         }
     }
 
@@ -731,7 +714,7 @@ public class App {
                 Statement stmt = con.createStatement();
                 // Create string for SQL statement
                 String strSelect =
-                        "SELECT city.Name, city.District, city.Population "
+                        "SELECT city.Name, city.CountryCode, city.District, city.Population "
                                 + "FROM city, country "
                                 + "WHERE country.Continent = '" + cont + "' "
                                 + "AND city.ID = country.Capital "
@@ -743,6 +726,7 @@ public class App {
                 while (rset.next()) {
                     City city = new City();
                     city.name = rset.getString("Name");
+                    city.CountryCode = rset.getString("CountryCode");
                     city.district = rset.getString("District");
                     city.population = rset.getInt("Population");
                     cities.add(city);
@@ -756,20 +740,27 @@ public class App {
         }
     }
 
-
-
-
-
+    public void displayCountries(ArrayList<Country> countries) {
+        // Print header
+        System.out.println(String.format("%-3s %-10s %-15s &-15s %-20s %-20s", "Code", "Name", "Continent", "Region", "Population", "Capital"));
+        // Loop over all employees in the list
+        for (Country country : countries) {
+            String emp_string =
+                    String.format("%-3s %-10s %-15s &-15s %-20s %-20s",
+                            country.Code, country.Name, country.Continent, country.region, country.Population, country.Capital);
+            System.out.println(emp_string);
+        }
+    }
 
 
     public void displayCities(ArrayList<City> cities) {
         // Print header
-        System.out.println(String.format("%-10s %-15s %-20s", "Name", "District", "Population"));
+        System.out.println(String.format("%-10s %-4s %-15s %-20s", "Name", "Country", "District", "Population"));
         // Loop over all employees in the list
         for (City city : cities) {
             String emp_string =
-                    String.format("%-10s %-15s %-20s",
-                            city.name, city.district, city.population);
+                    String.format("%-10s %-4s %-15s %-20s",
+                            city.name, city.CountryCode, city.district, city.population);
             System.out.println(emp_string);
         }
     }
@@ -786,17 +777,6 @@ public class App {
         }
     }
 
-    public void displayCountries(ArrayList<Country> countries) {
-        // Print header
-        System.out.println(String.format("%-10s %-15s %-20s", "Name", "Continent", "Population"));
-        // Loop over all employees in the list
-        for (Country country : countries) {
-            String emp_string =
-                    String.format("%-10s %-15s %-20s",
-                            country.Name, country.Continent, country.Population);
-            System.out.println(emp_string);
-        }
-    }
 
     /*
         public void displayPop(ArrayList<Population> pops){
