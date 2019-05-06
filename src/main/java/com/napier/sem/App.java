@@ -19,13 +19,13 @@ public class App {
 
         // Connect to database
         if (args.length < 1) {
-            a.connect("35.246.7.68:3306");
-           // a.connect("35.197.220.151");
+           // a.connect("35.246.7.68:3306");
+            a.connect("localhost:33060");
         } else {
             a.connect(args[0]);
         }
 
-        SpringApplication.run(App.class, args);
+        //SpringApplication.run(App.class, args);
 
         int n;
         String region;
