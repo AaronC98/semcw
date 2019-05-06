@@ -2,7 +2,6 @@ package com.napier.sem;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.util.ArrayList;
 
@@ -46,7 +45,6 @@ public class AppTest
        ArrayList<Country> countries = new ArrayList<>();
        Country country = new Country();
        Country country1 = new Country();
-       Country country2 = new Country();
 
        country.Name = "Sweden";
        country.Continent = "Europe";

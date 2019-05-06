@@ -76,7 +76,6 @@
             - docker build -t gcr.io/${PROJECT_ID}/web web/.
             # Push the web image.
             - docker push gcr.io/${PROJECT_ID}/web
-            - gcloud container clusters delete hr-cluster
             # Create a container cluster.  We only need one node.
             - gcloud container clusters create hr-cluster --num-nodes=1
             # Tell kubernetes to run the built database image, opening port 3306
